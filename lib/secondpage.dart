@@ -7,15 +7,24 @@ class SecondPage extends StatefulWidget {
     super.key,
     required this.list,
     required this.showbottom,
+    required this.title,
+    required this.subtitle,
   });
   final List<Model> list;
   final void Function() showbottom;
+  final TextEditingController title;
+  final TextEditingController subtitle;
 
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
 
 class _SecondPageState extends State<SecondPage> {
+  void onedit(int index) {
+    var task = box.getAt(index);
+    box.putAt(index, task);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,10 +42,10 @@ class _SecondPageState extends State<SecondPage> {
               child: InkWell(
                   onTap: () {
                     setState(() {
-                      var task = box.getAt(index);
-                      box.putAt(index, task);
-
                       widget.showbottom();
+                      box.getAt(index);
+                      box.deleteAt(index);
+                      // need to work on ittt pending to update the itemmsss
                     });
                   },
                   child: ListTile(

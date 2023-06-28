@@ -15,10 +15,10 @@ class _FirstScreenState extends State<FirstScreen> {
   final _subtitileController = TextEditingController();
 
   final List<Model> _listitems = [Model(subtitles: "holaa", titles: "haiii")];
-  void onsubmit(Model value) async {
+  void onsubmit(Model value) {
     if (_titleController.text.isNotEmpty ||
         _subtitileController.text.isNotEmpty) {
-      await box.put(value.id, value);
+      box.put(value.id, value);
     }
     // _listitems.add(value);
   }
@@ -80,6 +80,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       onsubmit(Model(subtitles: subtitle, titles: title));
                     });
                     Navigator.pop(context);
+
                     _titleController.clear();
                     _subtitileController.clear();
 
@@ -117,6 +118,17 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // bottomNavigationBar: IconButton.filledTonal(
+      //     onPressed: () {
+      //       setState(() {
+      //         box.clear();
+      //       });
+      //     },
+      //     icon: const Icon(
+      //       Icons.delete_forever,
+      //       size: 40,
+      //       color: Colors.redAccent,
+      //     )),
       appBar: AppBar(
         toolbarHeight: 100,
         shape: const RoundedRectangleBorder(
@@ -143,6 +155,8 @@ class _FirstScreenState extends State<FirstScreen> {
         ],
       ),
       body: SecondPage(
+        title: _titleController,
+        subtitle: _subtitileController,
         list: _listitems,
         showbottom: bottomsheet,
       ),
