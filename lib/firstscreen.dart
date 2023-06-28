@@ -23,13 +23,6 @@ class _FirstScreenState extends State<FirstScreen> {
     // _listitems.add(value);
   }
 
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _subtitileController.dispose();
-    super.dispose();
-  }
-
   void bottomsheet() {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
@@ -81,12 +74,14 @@ class _FirstScreenState extends State<FirstScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    var title = _titleController.text.trim();
+                    var subtitle = _subtitileController.text.trim();
                     setState(() {
-                      onsubmit(Model(
-                          subtitles: _subtitileController.text,
-                          titles: _titleController.text));
+                      onsubmit(Model(subtitles: subtitle, titles: title));
                     });
                     Navigator.pop(context);
+                    _titleController.clear();
+                    _subtitileController.clear();
 
                     // var titlee = _titleController.text;
                     // var subtitlee = _subtitileController.text;
@@ -110,6 +105,13 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
           )),
     );
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _subtitileController.dispose();
+    super.dispose();
   }
 
   @override

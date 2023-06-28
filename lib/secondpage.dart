@@ -32,7 +32,12 @@ class _SecondPageState extends State<SecondPage> {
               color: Colors.green[100],
               child: InkWell(
                   onTap: () {
-                    widget.showbottom;
+                    setState(() {
+                      var task = box.getAt(index);
+                      box.putAt(index, task);
+
+                      widget.showbottom();
+                    });
                   },
                   child: ListTile(
                     title: Text(
